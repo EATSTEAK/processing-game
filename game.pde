@@ -6,7 +6,7 @@ void draw() {
   clear();
   background(100);
   push();
-  translate(150, 200);
+  translate(mouseX, mouseY);
   noStroke();
   fill(128);
   triangle(0, -40, 10, 0, 0, 20);
