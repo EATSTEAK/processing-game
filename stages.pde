@@ -22,7 +22,7 @@ class Stage {
   public void tick() {
     // TODO: Spawning background and foreground objects by scrollSpeed
     long stageTick = GameVariables.getGameDelta() - initTick;
-    LinkedList<Integer> removedObjects = new LinkedList<>();
+    LinkedList<Integer> removedObjects = new LinkedList<Integer>();
     int i = 0;
     for(GameObject gameObj: trackedObjects) {
       gameObj.tick(stageTick, scrollSpeed);
@@ -49,8 +49,12 @@ class Stage {
     return accentColor;
   }
   
-  public HashMap<Long, GameObject> getBackgroundObjects();
+  public HashMap<Long, GameObject> getBackgroundObjects() {
+    return new HashMap<Long, GameObject>();
+  }
   
-  public HashMap<Long, GameObject> getForegroundObjects();
-  
+  public HashMap<Long, GameObject> getForegroundObjects() {
+    return new HashMap<Long, GameObject>();
+  }
+ 
 }
