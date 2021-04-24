@@ -4,6 +4,25 @@ interface Hitbox {
   
 }
 
+
+class VertexBuilder {
+  
+  private ArrayList<Pair<Integer, Integer>> vertexes = new ArrayList<Pair<Integer, Integer>>();
+  
+  public VertexBuilder add(int x, int y) {
+    vertexes.add(new Pair<Integer, Integer>(x, y));
+    return this;
+  }
+  
+  public void build() {
+    beginShape();
+    for(Pair<Integer, Integer> coord : vertexes) {
+      vertex(coord.first, coord.second);
+    }
+    endShape();
+  }
+}
+
 class RectHitbox implements Hitbox {
   
   private int x1;
