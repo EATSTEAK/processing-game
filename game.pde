@@ -1,7 +1,14 @@
 int frames = 0;
-MainCharacter mChar;
+MainCharacter[] mChars;
 void setup() {
-  mChar = new MainCharacter(500, -100, 180);
+  mChars = new MainCharacter[]{ 
+    new MainCharacter(150, 500, -100, 180),
+    new MainCharacter(100, 550, -50, 180),
+    new MainCharacter(200, 550, -50, 180),
+    new MainCharacter(150, 600, -200, 360),
+    new MainCharacter(50, 600, -300, 720),
+    new MainCharacter(250, 400, 200, 180)
+  };
   size(300, 400);
 }
 
@@ -9,14 +16,17 @@ void draw() {
   frames++;
   clear();
   background(100);
-  mChar.draw();
+  for(MainCharacter mChar : mChars) {
+    mChar.draw();
+  }
 }
 
 class MainCharacter {
 
-  int start, end, duration;
+  int x, start, end, duration;
 
-  MainCharacter(int start, int end, int duration) {
+  MainCharacter(int x, int start, int end, int duration) {
+    this.x = x;
     this.start = start;
     this.end = end;
     this.duration = duration;
@@ -28,16 +38,16 @@ class MainCharacter {
     int position = (int)((end - start) * ease);
     for (int i = start; i >= start + position; i -= 10) {
       push();
-      translate(140, i);
+      translate(x - 10, i);
       drawFire();
       pop();
       push();
-      translate(160, i);
+      translate(x + 10, i);
       drawFire();
       pop();
     }
     push();
-    translate(150, start + position);
+    translate(x, start + position);
     // translate(mouseX, mouseY);
     drawCharater(mousePressed);
     pop();
