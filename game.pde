@@ -4,7 +4,7 @@ static class GameVariables {
   private static long initTime = 0;
   private static long lastTick = -1;
   private static Ui currentUi;
-  private static boolean hitboxDebug = true;
+  private static boolean hitboxDebug = false;
   
   public static long getGameDelta() {
     return System.currentTimeMillis() - initTime;
