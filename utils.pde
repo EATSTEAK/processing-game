@@ -2,6 +2,9 @@ interface Hitbox {
 
   public boolean isHitted(int x, int y);
   
+  public boolean isHitted(Hitbox hitbox);
+  
+  public void shift(int x, int y);
 }
 
 
@@ -30,7 +33,7 @@ class RectHitbox implements Hitbox {
   private int y1;
   private int y2;
   
-  public RectHitbox(int x1, int x2, int y1, int y2) {
+  public RectHitbox(int x1, int y1, int x2, int y2) {
     if(x1 > x2 || y1 > y2) throw new IllegalArgumentException("First coordinate is must be smaller than second coordinate");
     this.x1 = x1;
     this.x2 = x2;
@@ -40,8 +43,33 @@ class RectHitbox implements Hitbox {
   
   @Override
   public boolean isHitted(int x, int y) {
-    if(x1 <= x && x2 >= x && y1 <= y && y2 <= y) return true;
+    if(x1 <= x && x2 >= x && y1 <= y && y2 >= y) return true;
     return false;
+  }
+  
+  
+  @Override
+  public boolean isHitted(Hitbox hitbox) {
+    // Implemented RectHitbox only.
+    if(hitbox instanceof RectHitbox) {
+      RectHitbox rectHitbox = (RectHitbox) hitbox;
+      boolean isHitted = false;
+      for(int i=rectHitbox.x1;i<=rectHitbox.x2;i++) {
+        for(int j=rectHitbox.y1;j<=rectHitbox.y2;j++) {
+          if(this.isHitted(i, j)) isHitted = true;
+        }
+      }
+      return isHitted;
+    }
+    return false;
+  }
+  
+  @Override
+  public void shift(int x, int y) {
+    this.x1 += x;
+    this.x2 += x;
+    this.y1 += y;
+    this.y2 += y;
   }
 
 }
